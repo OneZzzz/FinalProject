@@ -11,6 +11,12 @@ public class Equipment : Item
 
     public Equipment(string equipName)
     {
-        sprite = Sprite.Create((Texture2D)AssetDatabase.LoadAssetAtPath("Assets/Equipments/" + equipName + ".png", typeof(Texture2D)), new Rect(0, 0, 100, 100), new Vector2(0, 0));
+        sprite = Resources.Load<Sprite>("Charms/" + equipName);
+    }
+
+    Object[] GetSprites(string fileName)
+    {
+        Object[] sprites = Resources.LoadAll(fileName);
+        return sprites;
     }
 }
