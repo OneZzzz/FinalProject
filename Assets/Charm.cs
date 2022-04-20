@@ -35,7 +35,7 @@ public class Charm : Item
     public Charm(string charmName)
     {
         itemName = charmName;
-        sprite = Sprite.Create((Texture2D)AssetDatabase.LoadAssetAtPath("Assets/Charms/" + charmName + ".png", typeof(Texture2D)), new Rect(0, 0, 100, 100), new Vector2(0, 0));
+        sprite = Resources.Load<Sprite>("Charms/" + charmName);
         description = NameToDescription[itemName];
         price = NameToPrice[itemName];
         space = NameToSpace[itemName];
