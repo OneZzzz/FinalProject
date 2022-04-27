@@ -8,11 +8,13 @@ public class SmartEnemy : MonoBehaviour
     Transform playerTf;
     Rigidbody2D myRb;
     float detectDistance = 4, quitDistance = 8;
-    float roamSpeed = 4f, chaseSpeed = 7f, retreatSpeed = 3f;
+    float roamSpeed = 6f, chaseSpeed = 10f, retreatSpeed = 4f;
     float retreatTime = 1.5f;
     List<Transform> roamPosList = new List<Transform>();
     int roamIndex;
     Vector3 roamTarget;
+
+    SpriteRenderer sp;
 
     enum State {Idle, Roaming, Chasing, Retreating }
     State state;
@@ -20,6 +22,7 @@ public class SmartEnemy : MonoBehaviour
 
     private void Start()
     {
+        sp = GetComponent<SpriteRenderer>();
         if (doRoam)
         {
             normalState = State.Roaming;
@@ -40,7 +43,6 @@ public class SmartEnemy : MonoBehaviour
 
     private void Update()
     {
-        print(roamTarget);
         if(state == normalState)
         {
             //change to State.Chasing
@@ -57,6 +59,10 @@ public class SmartEnemy : MonoBehaviour
             if(state == State.Roaming)
             {
                 if ((roamTarget - transform.position).magnitude <= 0.05) newRomTarget();
+                if (roamTarget.x < transform.position.x)
+                    sp.flipX = false;
+                else
+                    sp.flipX = true;
                 myRb.MovePosition(transform.position + (roamTarget - transform.position).normalized * roamSpeed * Time.deltaTime);
             }
         }
@@ -64,6 +70,11 @@ public class SmartEnemy : MonoBehaviour
         {
             //State.Chasing
             myRb.MovePosition(transform.position + CheckDirection() * chaseSpeed *Time.deltaTime);
+
+            if (roamTarget.x < transform.position.x)
+                sp.flipX = false;
+            else
+                sp.flipX = true;
 
             //change to normalState
             if (CheckDistance() >= quitDistance)
@@ -84,6 +95,7 @@ public class SmartEnemy : MonoBehaviour
     }
     Vector3 CheckDirection()
     {
+
         return (playerTf.position - transform.position).normalized;
     }
     void newRomTarget()
@@ -94,8 +106,8 @@ public class SmartEnemy : MonoBehaviour
             index = (int)Random.Range(0f,roamPosList.Count-0.001f);
         }
         roamIndex = index;
-        print(roamIndex);
         roamTarget = roamPosList[roamIndex].position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -105,6 +117,7 @@ public class SmartEnemy : MonoBehaviour
         {
             if (state == State.Retreating) StopAllCoroutines();
             StartCoroutine(Retreat());
+            collision.gameObject.GetComponent<PlayControl>().BeAttack(5);
         }
     }
 
