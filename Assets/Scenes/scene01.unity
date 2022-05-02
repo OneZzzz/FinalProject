@@ -626,20 +626,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6523913582564398716, guid: faad2b7b7080ec04097f348e82941b19, type: 3}
-      propertyPath: m_Size.y
-      value: 3.1336575
-      objectReference: {fileID: 0}
-    - target: {fileID: 6523913582564398716, guid: faad2b7b7080ec04097f348e82941b19, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.63642883
-      objectReference: {fileID: 0}
     - target: {fileID: 6523913582564398717, guid: faad2b7b7080ec04097f348e82941b19, type: 3}
       propertyPath: m_Name
       value: ListenSign
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6523913582564398688, guid: faad2b7b7080ec04097f348e82941b19, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faad2b7b7080ec04097f348e82941b19, type: 3}
 --- !u!1 &1020390075
 GameObject:
