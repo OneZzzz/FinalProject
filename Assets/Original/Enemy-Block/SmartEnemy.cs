@@ -9,7 +9,7 @@ public class SmartEnemy : MonoBehaviour
     Rigidbody2D myRb;
     float detectDistance = 4, quitDistance = 8;
     float roamSpeed = 6f, chaseSpeed = 10f, retreatSpeed = 4f;
-    float retreatTime = 1.5f;
+    float retreatTime = 0.75f;
     List<Transform> roamPosList = new List<Transform>();
     int roamIndex;
     Vector3 roamTarget;
