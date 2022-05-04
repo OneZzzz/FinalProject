@@ -9,11 +9,11 @@ public class Charm : Item
     public int space;
     static Dictionary<string, string> NameToDisplayName = new Dictionary<string, string>()
     {
-        {"CharmA","Strength of Socere"}, //double jump
+        {"CharmA","Strength of Socere"}, // jump higher
         {"CharmB","Eledem's Element"}, // attack jump
         {"CharmC","Will's Whisper"}, // killing enemy restores health
         {"CharmD","Power of Plunia "}, // distant attack
-        {"CharmE","Liu's Legacy"}, //some crazy shit
+        {"CharmE","Liu's Legacy"}, //blessingss
     };
     static Dictionary<string, string> NameToDescription = new Dictionary<string, string>()
     {

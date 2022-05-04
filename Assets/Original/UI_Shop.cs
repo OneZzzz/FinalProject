@@ -8,8 +8,9 @@ public class UI_Shop : MonoBehaviour
 {
     Transform ItemSlotContainer, Description, ItemSlotTemplate;
     List<string> TextInThisShop = new List<string>() { "CharmA", "CharmB", "CharmC", "CharmD", "CharmE" };
+    List<Charm> RemoveLater = new List<Charm>();
     List<Charm> InThisShop = new List<Charm>(); 
-    bool showing = false;
+    public bool showing = false;
     bool moving = false;
     int slotSpacing = 120;
     int selected = 0;
@@ -47,6 +48,7 @@ public class UI_Shop : MonoBehaviour
         {
             DropCoins.i.money -= InThisShop[selected].price;
             Inventory.i.Aquire(InThisShop[selected].itemName);
+            RemoveLater.Add(InThisShop[selected]);
         }
     }
 
@@ -72,13 +74,11 @@ public class UI_Shop : MonoBehaviour
 
     private void UpdateDescription()
     {
-        foreach(Transform child in Description.Find("CoinContainer")){
-            if (child.gameObject.name != "CoinTemplate") Destroy(child.gameObject);
-        }
 
         Description.Find("Name").GetComponent<TMP_Text>().text = InThisShop[selected].displayName;
         Description.Find("Description").GetComponent<TMP_Text>().text = InThisShop[selected].description;
 
+        /*
         int spaceAmount = InThisShop[selected].space;
         float xStart = 0, xDelta = 50;
         xStart = spaceAmount % 2 == 0 ? -xDelta * (spaceAmount / 2 - 0.5f) : -xDelta * ((spaceAmount - 1) / 2);
@@ -87,7 +87,7 @@ public class UI_Shop : MonoBehaviour
             GameObject newCoin = Instantiate(Description.Find("CoinContainer").Find("CoinTemplate"), Description.Find("CoinContainer")).gameObject;
             newCoin.SetActive(true);
             newCoin.GetComponent<RectTransform>().anchoredPosition += new Vector2(xStart + xDelta*i,0);
-        }
+        }*/
         
     }
 
@@ -101,6 +101,7 @@ public class UI_Shop : MonoBehaviour
         Vector2 endVec = startVec + new Vector2(0, slotSpacing * toward);
         while (timeCount < totalTime)
         {
+            print("move");
             ItemSlotContainer.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(startVec, endVec, timeCount/totalTime);
             timeCount += Time.deltaTime;
             if (timeCount / totalTime >= 0.5 && !updateDescription) {
@@ -119,15 +120,16 @@ public class UI_Shop : MonoBehaviour
         Description.gameObject.SetActive(true);
         foreach(Charm i in InThisShop)
         {
-            RectTransform itemSlotRectTransform = Instantiate(ItemSlotTemplate.gameObject, ItemSlotContainer).GetComponent<RectTransform>();
-            i.uiBlock = itemSlotRectTransform;
-            i.uiBlock.gameObject.SetActive(true);
-            i.uiBlock.anchoredPosition += new Vector2(0,-slotSpacing*y);
-            i.uiBlock.Find("Image").GetComponent<Image>().sprite = i.sprite;
-            i.uiBlock.Find("Price").GetComponent<TMP_Text>().text = "" + i.price;
+                RectTransform itemSlotRectTransform = Instantiate(ItemSlotTemplate.gameObject, ItemSlotContainer).GetComponent<RectTransform>();
+                i.uiBlock = itemSlotRectTransform;
+                i.uiBlock.gameObject.SetActive(true);
+                i.uiBlock.anchoredPosition += new Vector2(0, -slotSpacing * y);
+                i.uiBlock.Find("Image").GetComponent<Image>().sprite = i.sprite;
+                i.uiBlock.Find("Price").GetComponent<TMP_Text>().text = "" + i.price;
 
-            y++;
+                y++;
         }
+        UpdateDescription();
         StartCoroutine(GetComponent<UI_Displayer>().ShowPanel());
     }
 
@@ -146,6 +148,13 @@ public class UI_Shop : MonoBehaviour
         {
             Destroy(i.uiBlock.gameObject);
         }
+        /*
+        foreach(Charm i in RemoveLater)
+        {
+            print(i.itemName);
+            InThisShop.Remove(i);
+        }
+        RemoveLater.Clear();*/
         selected = 0;
     }
 }

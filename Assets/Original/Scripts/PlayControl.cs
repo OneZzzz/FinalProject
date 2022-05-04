@@ -58,10 +58,12 @@ public class PlayControl : MonoBehaviour
         animator.SetFloat("speedY", rigidbody.velocity.y);
         if (!Input.GetKeyDown(KeyCode.Space)) return;
         if (!CheckInGround()) return;
-        rigidbody.AddForce(Vector2.up * jumpSpeed);
+        if(CheckCharm("CharmA")) rigidbody.AddForce(Vector2.up * jumpSpeed * 1.15f);
+        else rigidbody.AddForce(Vector2.up * jumpSpeed * 1f);
     }
     void JumpAttackSec()
     {
+        if (!CheckCharm("CharmB")) return;
         if (CheckInGround()) return;
         if (!CheckInGround(2)) return;
         if (!CheckPlayAnimationName("jumpdown")) return;
@@ -142,5 +144,14 @@ public class PlayControl : MonoBehaviour
         if (currentHp == 0) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         hp.fillAmount = currentHp / maxHp;
 
+    }
+
+    bool CheckCharm(string cName)
+    {
+        foreach(Charm c in Inventory.i.MyCharms)
+        {
+            if (c.itemName == cName) return true;
+        }
+        return false;
     }
 }

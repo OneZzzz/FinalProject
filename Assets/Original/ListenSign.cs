@@ -5,6 +5,7 @@ using UnityEngine;
 public class ListenSign : MonoBehaviour
 {
     [SerializeField] int textTag = 0;
+    [SerializeField] bool connectToShop = false;
     List<List<string>> allText = new List<List<string>>()
     {
         new List<string>(){//textTag 0
@@ -37,7 +38,7 @@ public class ListenSign : MonoBehaviour
     private void Update()
     {
         if (UI_Dialogue.i.inDialogue) return;
-        if (Input.GetKeyDown(KeyCode.W)&&canQue)
+        if (Input.GetKeyDown(KeyCode.W)&&canQue && !UI_Shop.i.showing)
         {
             UI_Dialogue.i.QueDialogue(allText[textTag]);
         }

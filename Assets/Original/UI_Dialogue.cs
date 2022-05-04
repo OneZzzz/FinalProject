@@ -11,6 +11,7 @@ public class UI_Dialogue : MonoBehaviour
     TMP_Text Text;
     List<string> currentText;
     PlayControl player;
+
     
     public static UI_Dialogue i
     {
