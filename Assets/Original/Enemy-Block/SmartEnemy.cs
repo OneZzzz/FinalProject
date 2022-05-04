@@ -110,6 +110,11 @@ public class SmartEnemy : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        DropCoins.i.Drop(7,transform.position);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Deal Damage

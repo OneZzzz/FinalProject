@@ -15,4 +15,9 @@ public class DumbEnemy : EnemyCommon
             if (rb.velocity.x >0) GetComponent<SpriteRenderer>().flipX = true;
         }
     }
+
+    private void OnDestroy()
+    {
+        DropCoins.i.Drop(4, transform.position);
+    }
 }

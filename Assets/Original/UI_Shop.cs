@@ -7,12 +7,22 @@ using TMPro;
 public class UI_Shop : MonoBehaviour
 {
     Transform ItemSlotContainer, Description, ItemSlotTemplate;
-    List<string> TextInThisShop = new List<string>() { "CharmA", "CharmB", "CharmC" };
+    List<string> TextInThisShop = new List<string>() { "CharmA", "CharmB", "CharmC", "CharmD", "CharmE" };
     List<Charm> InThisShop = new List<Charm>(); 
     bool showing = false;
     bool moving = false;
     int slotSpacing = 120;
     int selected = 0;
+
+    static UI_Shop instance;
+    public static UI_Shop i
+    {
+        get
+        {
+            if (instance == null) instance = FindObjectOfType<UI_Shop>();
+            return instance;
+        }
+    }
 
     private void Awake()
     {
@@ -28,6 +38,16 @@ public class UI_Shop : MonoBehaviour
     private void Start()
     {
         GetComponent<UI_Displayer>().afterHide = AfterErase;
+    }
+
+    public void BuyCharm()
+    {
+        print("button down");
+        if(DropCoins.i.money> InThisShop[selected].price)
+        {
+            DropCoins.i.money -= InThisShop[selected].price;
+            Inventory.i.Aquire(InThisShop[selected].itemName);
+        }
     }
 
     private void Update()
@@ -56,7 +76,7 @@ public class UI_Shop : MonoBehaviour
             if (child.gameObject.name != "CoinTemplate") Destroy(child.gameObject);
         }
 
-        Description.Find("Name").GetComponent<TMP_Text>().text = InThisShop[selected].itemName;
+        Description.Find("Name").GetComponent<TMP_Text>().text = InThisShop[selected].displayName;
         Description.Find("Description").GetComponent<TMP_Text>().text = InThisShop[selected].description;
 
         int spaceAmount = InThisShop[selected].space;

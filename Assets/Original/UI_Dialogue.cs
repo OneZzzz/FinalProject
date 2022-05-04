@@ -40,6 +40,7 @@ public class UI_Dialogue : MonoBehaviour
             else
             {
                 CloseDialogue();
+                UI_Shop.i.SetUp();
             }
         }
     }

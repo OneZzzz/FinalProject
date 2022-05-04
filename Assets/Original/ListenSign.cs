@@ -8,10 +8,10 @@ public class ListenSign : MonoBehaviour
     List<List<string>> allText = new List<List<string>>()
     {
         new List<string>(){//textTag 0
-        "This is textTag 0 line 1. This is textTag 0 line 1. This is textTag 0 line 1.",
-        "This is textTag 0 line 2. This is textTag 0 line 2. This is textTag 0 line 2.",
-        "This is textTag 0 line 3. This is textTag 0 line 3. This is textTag 0 line 3.",
-        "This is textTag 0 line 4. This is textTag 0 line 4. This is textTag 0 line 4."},
+        "line 1 welcome to shop",
+        "line 2 welcome to shop",
+        "line 3 welcome to shop",
+        "line 4 welcome to shop"},
         new List<string>(){//textTag 1
         "This is textTag 1 line 1. This is textTag 1 line 1. This is textTag 3 line 1.",
         "This is textTag 1 line 2. This is textTag 1 line 2. This is textTag 3 line 2.",

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public string displayName;
     public string itemName;
     public string description;
     public Sprite sprite;

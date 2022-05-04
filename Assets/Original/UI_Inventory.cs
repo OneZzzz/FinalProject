@@ -106,7 +106,7 @@ public class UI_Inventory : MonoBehaviour
         itemCoord[selectedCoord].uiBlock.Find("WhenSelected").gameObject.SetActive(false);
         selectedCoord += delta;
         itemCoord[selectedCoord].uiBlock.Find("WhenSelected").gameObject.SetActive(true);
-        equipmentDCName.GetComponent<TMP_Text>().text = itemCoord[selectedCoord].itemName;
+        equipmentDCName.GetComponent<TMP_Text>().text = itemCoord[selectedCoord].displayName;
         equipmentDCDescription.GetComponent<TMP_Text>().text = itemCoord[selectedCoord].description;
     }
 }
