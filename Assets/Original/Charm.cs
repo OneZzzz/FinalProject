@@ -17,10 +17,10 @@ public class Charm : Item
     };
     static Dictionary<string, string> NameToDescription = new Dictionary<string, string>()
     {
-        {"CharmA","The holder of Socere's strength can jump in the air like a faring bird."},
-        {"CharmB","The history is written that Senior Eledem attacks on his own feet to fire himself toward the infiniy."},
-        {"CharmC","Elder Will blesses the brave with health recover after a battle."},
-        {"CharmD","God of war Plunia fires distant shots through long pressing K."},
+        {"CharmA","The holder of Socere's strength can jump in the air like a faring bird. [jump higher]"},
+        {"CharmB","The history is written that Senior Eledem attacks on his own feet to fire himself toward the infiniy. [attack beneath while jumping to double jump]"},
+        {"CharmC","Elder Will blesses the brave with health recover after a battle. [recover health after each kill]"},
+        {"CharmD","God of war Plunia shoots from thousand miles away. [long press k to use distant shot]"},
         {"CharmE","Developer Liu wishes you good luck in your adventurous journey!"},
     };
     static Dictionary<string, int> NameToPrice = new Dictionary<string, int>()
