@@ -15,7 +15,9 @@ public class PlayControl : MonoBehaviour
 
     private float maxHp = 100, currentHp;
 
-    private GameObject fx;
+    private float attack = 10;
+
+    private GameObject fx,hurtPart;
 
     public float speed=5, jumpSpeed=600,jumpSecSpeed;
 
@@ -31,6 +33,7 @@ public class PlayControl : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         fx = Resources.Load<GameObject>("fx");
+        hurtPart= fx = Resources.Load<GameObject>("hurtPart");
     }
     private void Update()
     {
@@ -38,6 +41,13 @@ public class PlayControl : MonoBehaviour
         JumpDefaul();
         JumpAttackSec();
         Attack();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "trigger")
+        {
+            collision.GetComponent<BossTrigger>().CreatBoss();
+        }
     }
 
     void Move()
@@ -61,7 +71,7 @@ public class PlayControl : MonoBehaviour
     {
         if (CheckInGround()) return;
         if (!CheckInGround(2)) return;
-        if (!CheckPlayAnimationName("jumpdown")) return;
+        if (CheckPlayAnimationName("jumpup")) return;
         if (Input.GetMouseButtonDown(0))
         {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
@@ -82,7 +92,7 @@ public class PlayControl : MonoBehaviour
     }
     private List<GameObject> CheckAttackPoint(Transform dir,string tag)
     {
-        RaycastHit2D[] raycastHit2Ds= Physics2D.CircleCastAll(dir.position, 0.2f, Vector2.up);
+        RaycastHit2D[] raycastHit2Ds= Physics2D.CircleCastAll(dir.position, 0.05f, Vector2.up);
         List<GameObject> targets=new List<GameObject>();
         for (int i = 0; i < raycastHit2Ds.Length; i++)
         {
@@ -109,34 +119,61 @@ public class PlayControl : MonoBehaviour
     }
     private void CreatFX(Vector2 target)
     {
-        GameObjectPool.instace.CreateObject("FX", "fx", fx,target, Quaternion.identity);
+        GameObjectPool.instace.CreateObject("hurt", "hurt", hurtPart,target, Quaternion.identity);
     }
     void Attack()
     {
         if (!Input.GetMouseButtonDown(0)) return;
-        if (!CheckInGround() && CheckInGround(2)) return;
+        if (!CheckInGround() && CheckInGround(2)  && CheckPlayAnimationName("jumpup")) return;
+        if (CheckPlayAnimationName("attcak") || CheckPlayAnimationName("hurt")) return;
+        animator.SetTrigger("attack");
+        
+
+    }
+    public void CreatAttackFx()
+    {
         List<GameObject> enemies;
         if (sprite.flipX)
         {
             enemies = CheckAttackPoint(right, "enemy");
-            CreatFX(right.position);
         }
         else
         {
             enemies = CheckAttackPoint(left, "enemy");
-            CreatFX(left.position);
         }
         if (enemies == null || enemies.Count <= 0) return;
         for (int i = 0; i < enemies.Count; i++)
         {
-            Destroy(enemies[i]);
+            if(enemies[i].GetComponent<EnemyCommon>()!=null)
+            enemies[i].GetComponent<EnemyCommon>().BeAttack(attack);
+            if (enemies[i].GetComponent<Boss>() != null)
+                enemies[i].GetComponent<Boss>().BeAttack(attack);
+        }
+        if (sprite.flipX)
+        {
+            CreatFX(right.position);
+        }
+        else
+        {
+            CreatFX(left.position);
         }
     }
     public void BeAttack(float num)
     {
+        if (CheckPlayAnimationName("hurt")) return;
+        animator.SetTrigger("hurt");
         currentHp -= num;
         if (currentHp < 0) currentHp = 0;
         if (currentHp == 0) SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         hp.fillAmount = currentHp / maxHp;
+
+    }
+
+    public float GetPlayBack(float dis)
+    {
+        if (!sprite.flipX)
+            return transform.position.x - dis;
+        else
+            return transform.position.x + dis;
     }
 }

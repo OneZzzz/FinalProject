@@ -15,4 +15,5 @@ public class DumbEnemy : EnemyCommon
             if (rb.velocity.x >0) GetComponent<SpriteRenderer>().flipX = true;
         }
     }
+ 
 }

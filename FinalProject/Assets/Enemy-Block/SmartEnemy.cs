@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmartEnemy : MonoBehaviour
+public class SmartEnemy : EnemyCommon
 {
     [SerializeField] bool doRoam;
     Transform playerTf;
@@ -112,12 +112,11 @@ public class SmartEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Deal Damage
         if(collision.gameObject.tag == "Player")
         {
             if (state == State.Retreating) StopAllCoroutines();
             StartCoroutine(Retreat());
-            collision.gameObject.GetComponent<PlayControl>().BeAttack(5);
+            collision.gameObject.GetComponent<PlayControl>().BeAttack(attack);
         }
     }
 

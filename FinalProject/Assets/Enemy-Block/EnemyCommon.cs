@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyCommon : MonoBehaviour
 {
-    [SerializeField] protected float health = 10;
+    [SerializeField] protected float health = 10,currentHp;
     [SerializeField] protected bool cycle = false;
     [SerializeField] protected float damage = 0;
     [SerializeField] protected float speed = 2;
@@ -16,6 +16,7 @@ public class EnemyCommon : MonoBehaviour
     float hitIntervalTime = 0.5f;
     bool couldHit = true;
 
+    public float attack = 5;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class EnemyCommon : MonoBehaviour
     }
     void Start()
     {
+        currentHp = health;
         moving = true;
         if (pp != null)
         {
@@ -31,19 +33,26 @@ public class EnemyCommon : MonoBehaviour
             pp.setCycle(cycle);
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            //damage player
             couldHit = false;
             StartCoroutine(HitInterval());
 
-            collision.gameObject.GetComponent<PlayControl>().BeAttack(5);
+            collision.gameObject.GetComponent<PlayControl>().BeAttack(attack);
 
         }
     }
+
+
+    public virtual void BeAttack(float attack)
+    {
+        currentHp -= attack;
+        if (currentHp <= 0)
+            Destroy(gameObject);
+    }
+
 
     IEnumerator HitInterval()
     {
