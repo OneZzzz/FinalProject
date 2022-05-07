@@ -25,10 +25,10 @@ public class Charm : Item
     };
     static Dictionary<string, int> NameToPrice = new Dictionary<string, int>()
     {
-        {"CharmA",2},
-        {"CharmB",3},
-        {"CharmC",5},
-        {"CharmD",10},
+        {"CharmA",5},
+        {"CharmB",10},
+        {"CharmC",10},
+        {"CharmD",15},
         {"CharmE",20},
     };
     static Dictionary<string, int> NameToSpace = new Dictionary<string, int>()

@@ -112,7 +112,7 @@ public class SmartEnemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        DropCoins.i.Drop(7,transform.position);
+        DropCoins.i.Drop((int)Random.Range(5,8.99f),transform.position);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

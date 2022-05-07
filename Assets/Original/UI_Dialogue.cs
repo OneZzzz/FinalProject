@@ -8,6 +8,7 @@ public class UI_Dialogue : MonoBehaviour
     static UI_Dialogue instance;
     int currentIndex = 0;
     public bool inDialogue = false;
+    bool goingToShop = false;
     TMP_Text Text;
     List<string> currentText;
     PlayControl player;
@@ -41,13 +42,14 @@ public class UI_Dialogue : MonoBehaviour
             else
             {
                 CloseDialogue();
-                UI_Shop.i.SetUp();
+                if(goingToShop)UI_Shop.i.SetUp();
             }
         }
     }
 
-    public void QueDialogue(List<string> text)
+    public void QueDialogue(List<string> text, bool toShop)
     {
+        goingToShop = toShop;
         inDialogue = true;
         currentIndex = 0;
         currentText = text;

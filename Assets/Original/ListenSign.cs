@@ -6,23 +6,36 @@ public class ListenSign : MonoBehaviour
 {
     [SerializeField] int textTag = 0;
     [SerializeField] bool connectToShop = false;
+    [SerializeField] int changeTextTag = -1;
     List<List<string>> allText = new List<List<string>>()
     {
         new List<string>(){//textTag 0
-        "line 1 welcome to shop",
-        "line 2 welcome to shop",
-        "line 3 welcome to shop",
-        "line 4 welcome to shop"},
+        "Ho ho ho, old Mercury haven't got any customer for ages.",
+        "How are you doing young man?",
+        "You want to get stronger to defeat Lord Scaridemore?",
+        "Then you're definetly in the right place!",
+        "Take a look!"},
         new List<string>(){//textTag 1
-        "This is textTag 1 line 1. This is textTag 1 line 1. This is textTag 3 line 1.",
-        "This is textTag 1 line 2. This is textTag 1 line 2. This is textTag 3 line 2.",
-        "This is textTag 1 line 3. This is textTag 1 line 3. This is textTag 3 line 3.",
-        "This is textTag 1 line 4. This is textTag 1 line 4. This is textTag 3 line 4."},
+        "What are you doing here young man?",
+        "You're really not supposed to be here... unless you want to be smashed and served as dinner to Lord Scaridemore.",
+        "Oh how brave!",
+        "You should visit my friend Mercury if you wanna destroy Scaridemore.",
+        "Just head straight and you'd see him. Fill up your pocket though, he aint cheap.",
+        "I wish you the best of luck..."},
         new List<string>(){//textTag 2
-        "This is textTag 2 line 1. This is textTag 2 line 1. This is textTag 3 line 1.",
-        "This is textTag 2 line 2. This is textTag 2 line 2. This is textTag 3 line 2.",
-        "This is textTag 2 line 3. This is textTag 2 line 3. This is textTag 3 line 3.",
-        "This is textTag 2 line 4. This is textTag 2 line 4. This is textTag 3 line 4."},
+        "Welcome back!",
+        "Old Mercury never say no to a customer!"},
+        new List<string>(){//textTag 3
+        "STOP!",
+        "Who you are? Why you are here? What you want to do?",
+        "Huh? You trynna kill the Lord?",
+        "You? Don't make a fool out of yourself.",
+        "I'll let you go just to see this hoplessly idiotic act",
+        "Go off champ"},
+        new List<string>(){//textTag 4
+        "Why you still here?",
+        "Ain't you planning to kill the Lord?",
+        "Huh idiot."},
     };
 
     bool canQue = false;
@@ -40,8 +53,14 @@ public class ListenSign : MonoBehaviour
         if (UI_Dialogue.i.inDialogue) return;
         if (Input.GetKeyDown(KeyCode.W)&&canQue && !UI_Shop.i.showing)
         {
-            UI_Dialogue.i.QueDialogue(allText[textTag]);
+            Invoke("LoadText", 0.1f);
         }
+    }
+
+    void LoadText()
+    {
+        UI_Dialogue.i.QueDialogue(allText[textTag], connectToShop);
+        if (changeTextTag != -1) textTag = changeTextTag;
     }
 
     IEnumerator MoveArrow()

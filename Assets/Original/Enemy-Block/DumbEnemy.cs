@@ -18,6 +18,6 @@ public class DumbEnemy : EnemyCommon
 
     private void OnDestroy()
     {
-        DropCoins.i.Drop(4, transform.position);
+        DropCoins.i.Drop((int)Random.Range(3f,4.99f), transform.position);
     }
 }
