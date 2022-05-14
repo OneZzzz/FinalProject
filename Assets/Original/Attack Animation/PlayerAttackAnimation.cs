@@ -109,19 +109,35 @@ public class PlayerAttackAnimation : MonoBehaviour
             }
         
     }
+    bool CheckCharm(string cName)
+    {
+        foreach (Charm c in Inventory.i.MyCharms)
+        {
+            if (c.itemName == cName) return true;
+        }
+        return false;
+    }
 
     void RangeAttack()
     {
-        if (animRange.gameObject.activeInHierarchy == true)
+        if (animRange.gameObject.activeInHierarchy == true && CheckCharm("CharmD"))
         {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            animRange.SetBool("IsPreparing", true);
+                if (this.GetComponent<PlayControl>().sprite.flipX)
+                {
+                    animRange.SetBool("IsPreparingRight", true);
+                }
+                else
+                {
+                    animRange.SetBool("IsPreparingLeft", true);
+                }
         }
         if (Input.GetKeyUp(KeyCode.K))
         {
-            animRange.SetBool("IsPreparing", false);
-        }
+            animRange.SetBool("IsPreparingLeft", false);
+                animRange.SetBool("IsPreparingRight", false);
+            }
         }
     }
 }

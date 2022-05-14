@@ -54,13 +54,15 @@ public class UI_Shop : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
             if (showing) Erase();
             else if (!showing) SetUp();
-        }
+        }*/
         if (showing && Input.GetKeyDown(KeyCode.W)) Move(-1);
         if (showing && Input.GetKeyDown(KeyCode.S)) Move(1);
+        if(showing && Input.GetKeyDown(KeyCode.Escape)) Erase();
     }
 
     private void Move(int toward)

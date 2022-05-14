@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class SmartEnemy : MonoBehaviour
 {
+    public float hp = 2;
+    bool canHit = true;
     [SerializeField] bool doRoam;
     Transform playerTf;
     Rigidbody2D myRb;
     float detectDistance = 4, quitDistance = 8;
     float roamSpeed = 6f, chaseSpeed = 10f, retreatSpeed = 4f;
-    float retreatTime = 0.75f;
+    float retreatTime = 1.5f;
     List<Transform> roamPosList = new List<Transform>();
     int roamIndex;
     Vector3 roamTarget;
@@ -43,6 +45,7 @@ public class SmartEnemy : MonoBehaviour
 
     private void Update()
     {
+        if (hp <= 0) Destroy(this.gameObject);
         if(state == normalState)
         {
             //change to State.Chasing
@@ -89,6 +92,25 @@ public class SmartEnemy : MonoBehaviour
         }
     }
 
+    public void DropHealth(float amount)
+    {
+        if (!canHit) return;
+        hp -= amount;
+        canHit = false;
+        StartCoroutine(resetHit());
+    }
+
+    IEnumerator resetHit()
+    {
+        float t = Random.Range(0, 0.5f), c = 0;
+        while (c < t)
+        {
+            c += Time.deltaTime;
+            yield return null;
+        }
+        canHit = true;
+
+    }
     float CheckDistance()
     {
         return (playerTf.position-transform.position).magnitude;
@@ -112,6 +134,7 @@ public class SmartEnemy : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (CheckCharm("CharmC")) FindObjectOfType<PlayControl>().RecoverHp();
         DropCoins.i.Drop((int)Random.Range(5,8.99f),transform.position);
     }
 
@@ -138,7 +161,14 @@ public class SmartEnemy : MonoBehaviour
         }
         state = normalState;
     }
-
+    bool CheckCharm(string cName)
+    {
+        foreach (Charm c in Inventory.i.MyCharms)
+        {
+            if (c.itemName == cName) return true;
+        }
+        return false;
+    }
 
 
 }

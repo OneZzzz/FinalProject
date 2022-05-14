@@ -17,10 +17,10 @@ public class Charm : Item
     };
     static Dictionary<string, string> NameToDescription = new Dictionary<string, string>()
     {
-        {"CharmA","The holder of Socere's strength can jump in the air like a faring bird. [jump higher]"},
-        {"CharmB","The history is written that Senior Eledem attacks on his own feet to fire himself toward the infiniy. [attack beneath while jumping to double jump]"},
-        {"CharmC","Elder Will blesses the brave with health recover after a battle. [recover health after each kill]"},
-        {"CharmD","God of war Plunia shoots from thousand miles away. [long press k to use distant shot]"},
+        {"CharmA","The holder of Socere's strength can jump in the air like a faring bird. [You can jump higher]"},
+        {"CharmB","The history is written that Senior Eledem has the bizarre skill to step and jump on soley air.  [You can double jump while in air]"},
+        {"CharmC","Elder Will blesses the brave with health recover after a battle. [You would recover health when you defeat an enemy]"},
+        {"CharmD","God of war Plunia shoots from thousand miles away. [You can press and hold [K] to fire in distance]"},
         {"CharmE","Developer Liu wishes you good luck in your adventurous journey!"},
     };
     static Dictionary<string, int> NameToPrice = new Dictionary<string, int>()
@@ -28,7 +28,7 @@ public class Charm : Item
         {"CharmA",5},
         {"CharmB",10},
         {"CharmC",10},
-        {"CharmD",15},
+        {"CharmD",10},
         {"CharmE",20},
     };
     static Dictionary<string, int> NameToSpace = new Dictionary<string, int>()

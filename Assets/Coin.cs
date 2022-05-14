@@ -12,6 +12,11 @@ public class Coin : MonoBehaviour
     IEnumerator Start()
     {
         GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-0.5f,0.5f), Random.Range(0,1f)).normalized * 300f);
+        
+        var body = GetComponent<Rigidbody2D>();
+        var impulse = (Random.Range(-400,400)* Mathf.Deg2Rad) * body.inertia;
+        body.AddTorque(impulse, ForceMode2D.Impulse);
+
         playerTransform = FindObjectOfType<PlayControl>().transform;
         float count = 0;
         while (count < 0.5f)

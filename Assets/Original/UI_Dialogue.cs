@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UI_Dialogue : MonoBehaviour
 {
     static UI_Dialogue instance;
     int currentIndex = 0;
     public bool inDialogue = false;
-    bool goingToShop = false;
+    bool goingToShop = false, ending = false;
     TMP_Text Text;
     List<string> currentText;
     PlayControl player;
@@ -32,7 +33,7 @@ public class UI_Dialogue : MonoBehaviour
     void Update()
     {
         if (!inDialogue) return;
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             if (currentIndex + 1 < currentText.Count)
             {
@@ -43,12 +44,14 @@ public class UI_Dialogue : MonoBehaviour
             {
                 CloseDialogue();
                 if(goingToShop)UI_Shop.i.SetUp();
+                if(ending) SceneManager.LoadScene("Menu");
             }
         }
     }
 
-    public void QueDialogue(List<string> text, bool toShop)
+    public void QueDialogue(List<string> text, bool toShop, bool isEnd)
     {
+        ending = isEnd;
         goingToShop = toShop;
         inDialogue = true;
         currentIndex = 0;

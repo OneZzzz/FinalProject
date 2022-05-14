@@ -44,6 +44,7 @@ public class UI_Inventory : MonoBehaviour
         if (showing && Input.GetKeyDown(KeyCode.D)) ItemMoveSelectedCoord(new Vector2(1, 0));
         if (showing && Input.GetKeyDown(KeyCode.W)) ItemMoveSelectedCoord(new Vector2(0, 1));
         if (showing && Input.GetKeyDown(KeyCode.S)) ItemMoveSelectedCoord(new Vector2(0,-1));
+        if (showing && Input.GetKeyDown(KeyCode.Escape)) CloseBackpack();
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             if (showing) CloseBackpack();

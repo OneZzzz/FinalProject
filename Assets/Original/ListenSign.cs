@@ -20,7 +20,8 @@ public class ListenSign : MonoBehaviour
         "You're really not supposed to be here... unless you want to be smashed and served as dinner to Lord Scaridemore.",
         "Oh how brave!",
         "You should visit my friend Mercury if you wanna destroy Scaridemore.",
-        "Just head straight and you'd see him. Fill up your pocket though, he aint cheap.",
+        "He got some nice stuffs to sell you!",
+        "Just head straight and you'd see him. On the lowest east end. Fill up your pocket though, he aint cheap.",
         "I wish you the best of luck..."},
         new List<string>(){//textTag 2
         "Welcome back!",
@@ -36,6 +37,15 @@ public class ListenSign : MonoBehaviour
         "Why you still here?",
         "Ain't you planning to kill the Lord?",
         "Huh idiot."},
+         new List<string>(){//textTag 5
+        "Hey! You Made It!",
+        "Wow congradulations!",
+        "Nobody expected a little knight from Mew Kroy Ytisrevinu to accomplish something so marvelous",
+         "This is truly impressive.",
+         "I guess it's time to say goodbye!",
+         "Thank you, for playing our game, from developer Peng, Emily, Leo, and Zeric",
+         "Wish the great memory lives on!",
+         "Goodbye!"},
     };
 
     bool canQue = false;
@@ -51,7 +61,7 @@ public class ListenSign : MonoBehaviour
     private void Update()
     {
         if (UI_Dialogue.i.inDialogue) return;
-        if (Input.GetKeyDown(KeyCode.W)&&canQue && !UI_Shop.i.showing)
+        if (Input.GetKeyDown(KeyCode.Return)&&canQue && !UI_Shop.i.showing)
         {
             Invoke("LoadText", 0.1f);
         }
@@ -59,7 +69,7 @@ public class ListenSign : MonoBehaviour
 
     void LoadText()
     {
-        UI_Dialogue.i.QueDialogue(allText[textTag], connectToShop);
+        UI_Dialogue.i.QueDialogue(allText[textTag], connectToShop, textTag == 5);
         if (changeTextTag != -1) textTag = changeTextTag;
     }
 

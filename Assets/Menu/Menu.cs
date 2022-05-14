@@ -28,6 +28,6 @@ public class Menu : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        SceneManager.LoadScene("scene01");
+        SceneManager.LoadScene("scene02");
     }
 }

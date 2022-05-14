@@ -8,7 +8,18 @@ public class ShootFireBallRight : MonoBehaviour
     public GameObject Myparent;
 public void Shoot()
     {
-        Instantiate(FireBall,Myparent.transform);
-        this.GetComponent<Animator>().SetBool("IsPreparing", false);
+        GameObject tempFire = Instantiate(FireBall, Myparent.transform);
+        tempFire.transform.parent = null;
+        this.GetComponent<Animator>().SetBool("IsPreparingLeft", false);
+        this.GetComponent<Animator>().SetBool("IsPreparingRight", false);
+    }
+
+    public void Shoot2()
+    {
+        GameObject tempFire = Instantiate(FireBall, Myparent.transform);
+        tempFire.GetComponent<FireBall>().Isleft = true;
+        tempFire.transform.parent = null;
+        this.GetComponent<Animator>().SetBool("IsPreparingLeft", false);
+        this.GetComponent<Animator>().SetBool("IsPreparingRight", false);
     }
 }

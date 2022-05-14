@@ -22,6 +22,12 @@ public class UI_Displayer : MonoBehaviour
 
     }
 
+    public void Blink()
+    {
+        StopAllCoroutines();
+        StartCoroutine(ShowPanel());
+    }
+
     public IEnumerator ShowPanel()
     {
         float timer = 0;
