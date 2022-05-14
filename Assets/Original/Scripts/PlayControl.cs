@@ -38,6 +38,9 @@ public class PlayControl : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         fx = Resources.Load<GameObject>("fx");
+        SoundManager.PlaySound("ambient", true, 1f);
+        SoundManager.PlaySound("ambient2", true, 0.1f);
+
     }
     private void Update()
     {
@@ -190,6 +193,8 @@ public class PlayControl : MonoBehaviour
     void Attack3()
     {
         if (!Input.GetKeyDown(KeyCode.J)) return;
+        List<string> swordSound = new List<string>() { "Sword1", "Sword2", "Sword3" };
+        SoundManager.PlaySound(swordSound[(int)Random.Range(0,2.99f)]);
         if (sprite.flipX)
         {
             Sword.transform.localPosition = new Vector3(0.5f, -1.36f, 0);

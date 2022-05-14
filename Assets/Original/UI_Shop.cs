@@ -44,11 +44,12 @@ public class UI_Shop : MonoBehaviour
     public void BuyCharm()
     {
         print("button down");
-        if(DropCoins.i.money> InThisShop[selected].price)
+        if(DropCoins.i.money>= InThisShop[selected].price)
         {
             DropCoins.i.money -= InThisShop[selected].price;
             Inventory.i.Aquire(InThisShop[selected].itemName);
             RemoveLater.Add(InThisShop[selected]);
+            SoundManager.PlaySound("coin",false, 2f);
         }
     }
 

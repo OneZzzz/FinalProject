@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 34631840120089084}
   - component: {fileID: 6077551102725444456}
   - component: {fileID: 6077551102725444469}
+  - component: {fileID: 3415897506855640308}
   m_Layer: 10
   m_Name: Body
   m_TagString: enemy
@@ -193,7 +194,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.016844451, y: -0.19651943}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -204,7 +205,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.954523, y: 0.60696113}
   m_EdgeRadius: 0
 --- !u!50 &1530010714494029145
 Rigidbody2D:
@@ -280,3 +281,67 @@ MonoBehaviour:
   cycle: 0
   damage: 5
   speed: 1
+  hp: 2
+--- !u!114 &3415897506855640308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530010714494029125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da1252187007cf947ae75e44255c3cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.1699996
+      outSlope: 4.1699996
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.23980819
+      value: 1
+      inSlope: -0.013956733
+      outSlope: -0.013956733
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2478168
+    - serializedVersion: 3
+      time: 0.47684428
+      value: -0.010287404
+      inSlope: -0.025305286
+      outSlope: -0.025305286
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.22174083
+    - serializedVersion: 3
+      time: 0.74289596
+      value: 1
+      inSlope: 0.0008736369
+      outSlope: 0.0008736369
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1463649
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.889476
+      outSlope: -3.889476
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

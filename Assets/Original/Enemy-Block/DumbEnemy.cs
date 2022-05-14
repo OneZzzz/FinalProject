@@ -24,6 +24,7 @@ public class DumbEnemy : EnemyCommon
         if (!canHit) return;
         hp -= amount;
         canHit = false;
+        GetComponent<BeHitEffect>().BeHit();
         StartCoroutine(resetHit());
     }
 
@@ -40,6 +41,7 @@ public class DumbEnemy : EnemyCommon
 
     private void OnDestroy()
     {
+        SoundManager.PlaySound("diefast");
         if (CheckCharm("CharmC")) FindObjectOfType<PlayControl>().RecoverHp();
         DropCoins.i.Drop((int)Random.Range(3f,4.99f), transform.position);
     }

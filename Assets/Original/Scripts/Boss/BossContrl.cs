@@ -10,7 +10,7 @@ public enum State
 
 public class BossContrl : Boss
 {
-    public GameObject bossHp;
+    public GameObject bossHp, finalListen;
     RectTransform hp;
     private Animator anim;
     private PlayControl player;
@@ -19,7 +19,7 @@ public class BossContrl : Boss
 
     private GameObject fxbs;
 
-    private float attackTime, idleTime,idleMax=2,attackMax=1, maxHP = 200;
+    private float attackTime, idleTime,idleMax=2,attackMax=1, maxHP = 500;
 
     private void Start()
     {
@@ -137,6 +137,7 @@ public class BossContrl : Boss
             Invoke("MoveDown", 0.6f);
         }
         currentHp -= attack;
+        print(currentHp);
         hp.localScale = new Vector3(currentHp / maxHp, 1, 1);
         if (currentHp <= 0)
             Death();
@@ -145,9 +146,10 @@ public class BossContrl : Boss
     {
 
         anim.SetTrigger("death");
+        SoundManager.PlaySound("dielong");
         Destroy(bossHp);
         Destroy(gameObject, 1f);
-        //Hereherehere
+        GameObject a = Instantiate(finalListen);
     }
 
 

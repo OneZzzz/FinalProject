@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     [HideInInspector]
-    public float maxHp = 100, currentHp=100,attack=10,speed=1.5f;
+    public float maxHp = 200, currentHp=100,attack=10,speed=1.5f;
 
     public virtual void BeAttack(float attack)
     {

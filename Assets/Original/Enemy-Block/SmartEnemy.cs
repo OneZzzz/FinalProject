@@ -97,6 +97,7 @@ public class SmartEnemy : MonoBehaviour
         if (!canHit) return;
         hp -= amount;
         canHit = false;
+        GetComponent<BeHitEffect>().BeHit();
         StartCoroutine(resetHit());
     }
 
@@ -134,6 +135,7 @@ public class SmartEnemy : MonoBehaviour
 
     private void OnDestroy()
     {
+        SoundManager.PlaySound("dieboss");
         if (CheckCharm("CharmC")) FindObjectOfType<PlayControl>().RecoverHp();
         DropCoins.i.Drop((int)Random.Range(5,8.99f),transform.position);
     }

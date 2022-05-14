@@ -38,6 +38,7 @@ public class EnemyCommon : MonoBehaviour
         {
             //damage player
             couldHit = false;
+
             StartCoroutine(HitInterval());
 
             collision.gameObject.GetComponent<PlayControl>().BeAttack(5);
